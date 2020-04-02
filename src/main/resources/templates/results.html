@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form>
+	<table>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td>Build Year</td>
+			<td>Power Rating</td>
+			<td>CPU</td>
+			<td>PSU</td>
+			<td>GPU</td>
+			<td>Ram (gb)</td>
+		</tr>
+		<tr th:each="currentComputer : ${computers}">
+			<td th:text="${currentComputer.id}"/>
+			<td th:text="${currentComputer.name}"/>
+			<td th:text="${currentComputer.buildYear}"/>
+			<td th:text="${currentComputer.power}"/>
+			<td th:text="${currentComputer.components.cpu}"/>
+			<td th:text="${currentComputer.components.gpu}"/>
+			<td th:text="${currentComputer.components.psu}"/>
+			<td th:text="${currentComputer.components.ramSize}"/>
+			<td><a th:href="@{/edit/{id}(id=${currentComputer.id})}">Edit</a></td>
+			<td><a th:href="@{/delete/{id}(id=${currentComputer.id})}">Delete</a></td>
+		</tr>
+	</table>
+</form>
+<a href="../inputComputer">Add a new computer</a>
+</body>
+</html>
