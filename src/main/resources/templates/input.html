@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<script type = "text/javascript">
+	
+	function validateForm(){
+		
+		if (document.subForm.name.value == ""){
+			alert( "Please provide a valid name!" );
+	        document.subForm.name.focus();
+	        return false;
+		}
+		
+		if (document.subForm.buildYear.value == 0 || isNaN(document.subForm.buildYear.value)){
+			alert( "Please provide a valid build year!" );
+	        document.subForm.buildYear.focus();
+	        return false;
+		}
+		
+		if (document.subForm.power.value == ""){
+			alert( "Please provide a power rating!" );
+	        document.subForm.power.focus();
+	        return false;
+		}
+		
+	}
+	
+
+</script>
 <meta charset="UTF-8">
 <title>Insert New Computer</title>
 </head>
 <body>
-<form th:object="${newComputer}" th:action="@{/update/{id}(id=${newComputer.id})}" method=POST>
+<form name="subForm" th:object="${newComputer}" th:action="@{/update/{id}(id=${newComputer.id})}" method=POST onsubmit="return(validateForm());">
 Name: <input name="name" size="20" th:field="*{name}"><br />
 Build Year: <input name="buildYear" size="20" th:field="*{buildYear}"><br />
 Power Rating: <input name="power" size="20" th:field="*{power}"><br />
-CPU: <input name="components.cpu" size="20" th:field="*{components.cpu}"><br />
-GPU: <input name="components.gpu" size="20" th:field="*{components.gpu}"><br />
-PSU: <input name="components.psu" size="20" th:field="*{components.psu}"><br />
-Ram (# of gb): <input name="components.ramSize" size="20" th:field="*{components.ramSize}"><br />
+CPU: <input id="cpu" name="components.cpu" size="20" th:field="*{components.cpu}"><br />
+GPU: <input name="gpu" size="20" th:field="*{components.gpu}"><br />
+PSU: <input name="psu" size="20" th:field="*{components.psu}"><br />
+Ram (# of gb): <input name="ramSize" size="20" th:field="*{components.ramSize}"><br />
 
 <input name="Submit" type="submit" value="submit" />
 </form>
